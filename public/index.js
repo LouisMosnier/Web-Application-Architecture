@@ -146,6 +146,105 @@ const actors = [{
   }]
 }];
 
+events.forEach (function(element){
+	bars.forEach (function(bar){
+        if (element.barId == bar.id) {
+            if (element.persons < 10) {
+                if (element.options.deductibleReduction == true) {
+                    element.price = element.persons * bar.pricePerPerson + (element.time * bar.pricePerHour);
+                    element.commission.insurance = 0.15 * element.price;
+                    element.commission.treasury = element.persons;
+                    element.commission.privateaser = element.commission.insurance;
+                    element.price = element.price + element.persons;
+
+                }
+                else {
+                    element.price = element.persons * bar.pricePerPerson + (element.time * bar.pricePerHour);
+                    element.commission.insurance = 0.15 * element.price;
+                    element.commission.treasury = element.persons;
+                    element.commission.privateaser = element.commission.insurance - element.commission.treasury;
+                    element.price = element.price + element.persons;
+                }
+                    
+                
+            }
+
+            if (element.persons < 20 & element.persons >= 10) {
+                if (element.options.deductibleReduction == true) {
+                    element.price = element.persons * bar.pricePerPerson + (element.time * bar.pricePerHour);
+                    element.commission.insurance = 0.15 * element.price;
+                    element.commission.treasury = element.persons;
+                    element.commission.privateaser = element.commission.insurance;
+                    element.price = element.price + element.persons;
+
+                }
+                else {
+                    element.price = element.persons * bar.pricePerPerson + (element.time * bar.pricePerHour);
+                    element.commission.insurance = 0.15 * element.price;
+                    element.commission.treasury = element.persons;
+                    element.commission.privateaser = element.commission.insurance - element.commission.treasury;
+                    element.price = element.price + element.persons;
+                }
+            }
+
+            if (element.persons < 60 & element.persons >= 20) {
+                if (element.options.deductibleReduction == true) {
+                    element.price = element.persons * bar.pricePerPerson + (element.time * bar.pricePerHour);
+                    element.commission.insurance = 0.15 * element.price;
+                    element.commission.treasury = element.persons;
+                    element.commission.privateaser = element.commission.insurance;
+                    element.price = element.price + element.persons;
+                }               
+                else {
+                    element.price = element.persons * bar.pricePerPerson + (element.time * bar.pricePerHour);
+                    element.commission.insurance = 0.15 * element.price;
+                    element.commission.treasury = element.persons;
+                    element.commission.privateaser = element.commission.insurance - element.commission.treasury;
+                    element.price = element.price + element.persons;
+                
+                }
+            }
+
+            if (element.persons >= 60) {
+                if (element.options.deductibleReduction == true) {
+                    element.price = element.persons * bar.pricePerPerson + (element.time * bar.pricePerHour);
+                    element.commission.insurance = 0.15 * element.price;
+                    element.commission.treasury = element.persons;
+                    element.commission.privateaser = element.commission.insurance;
+                    element.price = element.price + element.persons;
+                }
+                else {
+                    element.price = element.persons * bar.pricePerPerson + (element.time * bar.pricePerHour);
+                    element.commission.insurance = 0.15 * element.price;
+                    element.commission.treasury = element.persons;
+                    element.commission.privateaser = element.commission.insurance - element.commission.treasury;
+                    element.price = element.price + element.persons;
+                }
+            }
+			
+        }
+        
+	})
+	
+})
+events.forEach(function (element) {
+    bars.forEach(function (bar) {
+        actors.forEach(function (actor){
+            if (element.barId == bar.id & actor.eventId == element.id) {
+                actor.payment[0] = element.price;
+                actor.payment[1] = 0.5 * element.price;
+                actor.payment[2] = element.commission.insurance;
+                actor.payment[3] = element.commission.treasury;
+                actor.payment[4] = element.commission.privateaser;
+            }
+        })
+        
+	})
+
+})
+
+	
+
 console.log(bars);
 console.log(events);
 console.log(actors);
